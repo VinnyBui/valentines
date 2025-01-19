@@ -2,6 +2,7 @@
 import { motion, useMotionValue } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button"
+import Link from 'next/link';
 
 const Hero = () => {
   const size = useMotionValue(1);
@@ -71,9 +72,11 @@ const Hero = () => {
           whileTap={{ scale: 0.9 }}
           style={{ scale: size }}
         >
-          <Button className="text-3xl p-6">
-            ❤️
-          </Button>
+          <Link href="/Itinerary" passHref>
+            <Button className="text-3xl p-6">
+              ❤️
+            </Button>
+          </Link>
         </motion.div>
         <motion.div 
           style={{

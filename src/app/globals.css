@@ -2,20 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 37 100% 97%; /* Ivory */
+    --foreground: 0 90% 25%; /* Deep Rose */
+    --card: 0 20% 97%; /* Soft Pink */
+    --card-foreground: 0 90% 25%; /* Deep Rose */
+    --popover: 0 20% 97%; /* Soft Pink */
+    --popover-foreground: 0 90% 25%; /* Deep Rose */
+    --primary: 346 100% 63%; /* Cherry Red */
+    --primary-foreground: 37 100% 97%; /* Ivory */
+    --secondary: 0 60% 85%; /* Blush */
+    --secondary-foreground: 346 100% 63%; /* Cherry Red */
+    --muted: 0 20% 97%; /* Soft Pink */
+    --muted-foreground: 0 90% 25%; /* Deep Rose */
+    --accent: 0 60% 85%; /* Blush */
+    --accent-foreground: 346 100% 63%; /* Cherry Red */
+    --destructive: 346 100% 63%; /* Cherry Red */
+    --destructive-foreground: 37 100% 97%; /* Ivory */
+    --border: 0 60% 85%; /* Blush */
+    --input: 0 60% 85%; /* Blush */
+    --ring: 0 90% 25%; /* Deep Rose */
+    --chart-1: 346 100% 63%; /* Cherry Red */
+    --chart-2: 0 20% 97%; /* Soft Pink */
+    --chart-3: 0 60% 85%; /* Blush */
+    --chart-4: 0 90% 25%; /* Deep Rose */
+    --chart-5: 37 100% 97%; /* Ivory */
+    --radius: 0.5rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-primary text-foreground;
+  }
 }

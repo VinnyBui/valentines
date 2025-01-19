@@ -29,7 +29,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="h-screen w-screen flex flex-col justify-center items-center bg-white gap-0">
+    <main className="h-screen w-screen flex flex-col justify-center items-center bg-white gap-0">
       <motion.img
         src={currentGif}
         alt="Panda GIF"
@@ -96,7 +96,7 @@ const Hero = () => {
           </Button>
         </motion.div>
       </motion.div>
-    </section>
+    </main>
   );
 };
 

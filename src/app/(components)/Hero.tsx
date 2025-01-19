@@ -6,13 +6,20 @@ import { Button } from "@/components/ui/button"
 const Hero = () => {
   const size = useMotionValue(1);
   const [dislikeCount, setDislikeCount] = useState(0);
+  const [currentGif, setCurrentGif] = useState("/excited_panda.gif");
   const [position, setPosition] = useState({ top: "auto", left: "auto" });
 
   const handleDislikeClick = () => {
     size.set(size.get() * 1.2);
     setDislikeCount(dislikeCount + 1)
-    // Move button to a random position after 5 clicks
-    if (dislikeCount + 1 >= 5) {
+    if (dislikeCount >= 10) {
+      setCurrentGif("/mad_panda.gif"); 
+      setPosition({
+        top: `${Math.random() * 80 + 10}%`, // Random vertical position (10%-90%)
+        left: `${Math.random() * 80 + 10}%`, // Random horizontal position (10%-90%)
+      });
+    } else if (dislikeCount >= 5) {
+      setCurrentGif("/annoyed_panda.gif"); 
       setPosition({
         top: `${Math.random() * 80 + 10}%`, // Random vertical position (10%-90%)
         left: `${Math.random() * 80 + 10}%`, // Random horizontal position (10%-90%)
@@ -21,7 +28,20 @@ const Hero = () => {
   };
 
   return (
-    <section className="h-screen w-screen flex flex-col justify-center items-center bg-background">
+    <section className="h-screen w-screen flex flex-col justify-center items-center bg-white gap-0">
+      <motion.img
+        src={currentGif}
+        alt="Panda GIF"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{           
+          duration: 0.6,
+          delay: 1.1,
+          ease: "easeInOut", 
+        }}
+        className="h-48"
+      />
+      {/* Question */}
       <motion.div
         initial={{ 
           scale: 1, 
@@ -37,6 +57,7 @@ const Hero = () => {
           Will you be my  <span className="text-red-500">Valentine?</span>
         </h1>
       </motion.div>
+      {/* Decision */}
       <motion.div className="w-1/3 flex justify-around p-20"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -54,7 +75,7 @@ const Hero = () => {
             ❤️
           </Button>
         </motion.div>
-        <motion.div
+        <motion.div 
           style={{
             position: position.top === "auto" ? "relative" : "absolute",
             top: position.top,

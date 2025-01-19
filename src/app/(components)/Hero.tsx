@@ -13,7 +13,7 @@ const Hero = () => {
   const handleDislikeClick = () => {
     size.set(size.get() * 1.2);
     setDislikeCount(dislikeCount + 1)
-    if (dislikeCount >= 10) {
+    if (dislikeCount >= 7) {
       setCurrentGif("/mad_panda.gif"); 
       setPosition({
         top: `${Math.random() * 80 + 10}%`, // Random vertical position (10%-90%)
@@ -22,26 +22,26 @@ const Hero = () => {
     } else if (dislikeCount >= 5) {
       setCurrentGif("/annoyed_panda.gif"); 
       setPosition({
-        top: `${Math.random() * 80 + 10}%`, // Random vertical position (10%-90%)
-        left: `${Math.random() * 80 + 10}%`, // Random horizontal position (10%-90%)
+        top: `${Math.floor(Math.random() * 80 + 10)}%`,
+        left: `${Math.floor(Math.random() * 80 + 10)}%`,
       });
     }
   };
 
   return (
     <main className="h-screen w-screen flex flex-col justify-center items-center bg-white gap-0">
-      <motion.img
-        src={currentGif}
-        alt="Panda GIF"
+      <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{           
+        transition={{
           duration: 0.6,
           delay: 1.1,
-          ease: "easeInOut", 
+          ease: "easeInOut",
         }}
         className="h-48"
-      />
+      >
+        <img src={currentGif} alt="Panda GIF" className="h-full" />
+      </motion.div>
       {/* Question */}
       <motion.div
         initial={{ 

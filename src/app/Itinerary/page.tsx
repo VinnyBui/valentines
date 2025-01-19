@@ -8,20 +8,20 @@ import {
   CardTitle,
   CardHeader,
 } from "@/components/ui/card";
-import { MapPin, Clock7, Calendar, Link } from "lucide-react";
+import { MapPin, Clock7, Calendar, LinkIcon } from "lucide-react";
 
 
 const Itinerary = () => {
   return (
     <main className=" min-h-screen w-screen flex flex-col items-center justify-center p-4"
-    style={{ backgroundImage: "url('/bg.png')"}}>
+      style={{ backgroundImage: "url('/bg.png')"}}>
+      <div className="absolute inset-0 bg-white opacity-60"></div> {/* Overlay */}
       {/* Animated Title */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <div className="absolute inset-0 bg-white opacity-60"></div> {/* Overlay */}
         <h1 className="text-red-500 text-6xl font-extrabold mb-8 tracking-wide drop-shadow-lg">
           Activity
         </h1>
@@ -58,7 +58,7 @@ const Itinerary = () => {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Link/>
+              <LinkIcon />
               <a
                 href="https://www.yelp.com/biz/himizu-modern-japanese-fusion-westminster-2"
                 target="_blank"
@@ -95,7 +95,7 @@ const Itinerary = () => {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Link/>
+              <LinkIcon/>
               <a
                 href="https://www.yelp.com/biz/himizu-modern-japanese-fusion-westminster-2"
                 target="_blank"

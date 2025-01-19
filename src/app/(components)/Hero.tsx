@@ -13,13 +13,13 @@ const Hero = () => {
   const handleDislikeClick = () => {
     size.set(size.get() * 1.2);
     setDislikeCount(dislikeCount + 1)
-    if (dislikeCount >= 7) {
+    if (dislikeCount >= 5) {
       setCurrentGif("/mad_panda.gif"); 
       setPosition({
         top: `${Math.random() * 80 + 10}%`, // Random vertical position (10%-90%)
         left: `${Math.random() * 80 + 10}%`, // Random horizontal position (10%-90%)
       });
-    } else if (dislikeCount >= 5) {
+    } else if (dislikeCount >= 3) {
       setCurrentGif("/annoyed_panda.gif"); 
       setPosition({
         top: `${Math.floor(Math.random() * 80 + 10)}%`,
@@ -29,7 +29,7 @@ const Hero = () => {
   };
 
   return (
-    <main className="h-screen w-screen flex flex-col justify-center items-center bg-white gap-0">
+    <main className="h-screen w-screen flex flex-col justify-center items-center bg-white gap-6 px-4 overflow-x-hidden">
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -38,7 +38,7 @@ const Hero = () => {
           delay: 1.1,
           ease: "easeInOut",
         }}
-        className="h-48"
+        className="h-36 sm:h-48"
       >
         <img src={currentGif} alt="Panda GIF" className="h-full" />
       </motion.div>
@@ -53,13 +53,14 @@ const Hero = () => {
           rotate: [-10, 10, -8, 8, -4, 4, 0],
         }}
         transition={{ duration: 1, ease: "easeInOut" }}
+        className="text-center px-4"
       >
-        <h1 className="text-black text-5xl font-bold mb-6 drop-shadow-xl">
+        <h1 className="text-black text-3xl sm:text-5xl font-bold mb-4 sm:mb-6 drop-shadow-xl">
           Will you be my  <span className="text-red-500">Valentine?</span>
         </h1>
       </motion.div>
       {/* Decision */}
-      <motion.div className="w-1/3 flex justify-around p-20"
+      <motion.div className="w-1/3 flex justify-center p-20 gap-8"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{           

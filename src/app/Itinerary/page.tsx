@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Card,
@@ -7,15 +7,19 @@ import {
   CardTitle,
   CardHeader,
 } from "@/components/ui/card";
-import { MapPin, Clock7, Calendar, LinkIcon } from "lucide-react";
+import { Calendar, Clock7, LinkIcon } from "lucide-react";
 
 const Itinerary = () => {
-  const [showFirstText, setShowFirstText] = useState(true);
+  const [textState, setTextState] = useState("first");
 
   useEffect(() => {
-    // Switch to second text after 2 seconds
-    const timer = setTimeout(() => setShowFirstText(false), 2000); // 2 seconds delay
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
+    const timer1 = setTimeout(() => setTextState("second"), 2000); // Show second text after 2s
+    const timer2 = setTimeout(() => setTextState("none"), 4000); // Hide text after another 2s
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
   }, []);
 
   return (
@@ -29,105 +33,108 @@ const Itinerary = () => {
       {/* Animated Title */}
       <div className="relative">
         <AnimatePresence mode="wait">
-          {showFirstText ? (
+          {textState !== "none" && (
             <motion.h1
-              key="first-text"
+              key={textState}
               className="text-red-500 text-4xl md:text-6xl font-extrabold mb-4 md:mb-8 tracking-wide drop-shadow-lg text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
+              exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.8 }}
             >
-              You better have said yes on the first try...
-            </motion.h1>
-          ) : (
-            <motion.h1
-              key="second-text"
-              className="text-red-500 text-4xl md:text-6xl font-extrabold mb-4 md:mb-8 tracking-wide drop-shadow-lg text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              HERE ARE THE ACTIVITIES
+              {textState === "first"
+                ? "You better have said yes on the first try..."
+                : "HERE IS WHAT WE ARE DOING!!"}
             </motion.h1>
           )}
         </AnimatePresence>
       </div>
 
-      {/* Itinerary Cards */}
       <motion.div
-        className="w-full md:w-3/4 flex flex-col gap-6 md:gap-4 md:flex-row justify-center"
+        className="w-full md:w-3/4 flex flex-col gap-6 md:gap-4 justify-center items-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 3.5 }}
+        transition={{ duration: 0.8, delay: 4.5 }} // Appear after text disappears
       >
-        {/* Dinner Card */}
-        <Card className="bg-white border-none w-full md:w-1/3 text-primary shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-2xl md:text-3xl font-bold text-red-500">
-              Dinner
+        <Card className="bg-white border-none w-full md:w-[80%] lg:w-[70%] h-auto text-primary shadow-lg hover:shadow-xl transform transition-all duration-300 ease-out flex flex-col items-center p-6">
+          <CardHeader>
+            <CardTitle className="text-3xl md:text-4xl font-bold text-red-500 text-center">
+              123 Farm Valentine's Nights
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-lg md:text-xl font-medium border-t border-gray-200 pt-4 flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <Calendar />
-              <p className="text-gray-700">Friday 14th</p>
+          <CardContent className="text-lg md:text-xl font-medium border-t border-gray-200 pt-4 flex flex-col gap-6 w-full">
+            
+            {/* Event Images */}
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+              <img
+                src="https://cdn.prod.website-files.com/631aad8b72030df19f607a97/67a1036a9d62f034d7732fd0_123farm-valentines-nights_4729w-p-500.jpg"
+                alt="Valentine's Nights Lights at 123 Farm"
+                className="w-full max-w-[350px] md:w-1/2 h-auto rounded-lg shadow-md"
+              />
+              <img
+                src="https://cdn.prod.website-files.com/631aad8b72030df19f607a97/631e621ef265cf0027cf8b74_lav-nights-2-p-500.jpg"
+                alt="Dining at Valentine's Nights"
+                className="w-full max-w-[350px] md:w-1/2 h-auto rounded-lg shadow-md"
+              />
             </div>
-            <div className="flex items-center gap-2">
-              <Clock7 />
-              <p className="text-gray-700">6pm</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin />
-              <p className="text-gray-700">Himizu Japanese Fusion</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <LinkIcon />
-              <a
-                href="https://www.yelp.com/biz/himizu-modern-japanese-fusion-westminster-2"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open Yelp page for Himizu Modern Japanese Fusion"
-                className="inline-block bg-red-500 text-white font-semibold py-1 px-4 rounded-lg shadow hover:bg-pink-600"
-              >
-                View on Yelp
-              </a>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Cafe Card */}
-        <Card className="bg-white border-none w-full md:w-1/3 text-primary shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-2xl md:text-3xl font-bold text-red-500">
-              Cafe
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-lg md:text-xl font-medium border-t border-gray-200 pt-4 flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <Calendar />
-              <p className="text-gray-700">Friday 14th</p>
+            {/* Itinerary */}
+            <div className="mt-6">
+              <h2 className="text-2xl font-semibold text-center mb-4">Event Itinerary</h2>
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2">
+                  <Calendar />
+                  <p className="text-gray-700 font-medium">Sunday, February 16th</p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Clock7 />
+                  <p className="text-gray-700 font-medium">2:00 PM - Pick up</p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Clock7 />
+                  <p className="text-gray-700 font-medium">5:00 PM - Arrival</p>
+                </div>
+
+                <p className="text-gray-600">
+                  🌿 **Sightseeing and taking pictures!**
+                </p>
+
+                <div className="flex items-center gap-2">
+                  <Clock7 />
+                  <p className="text-gray-700 font-medium">7:00 PM - Valentine's Dinner</p>
+                </div>
+
+                <p className="text-gray-600">
+                  🍽️ **Enjoy a pink-themed dinner** at the **Grand Oak Restaurant**, featuring heart-shaped sourdough pizzas 
+                  and special cocktails.
+                </p>
+
+                <div className="flex items-center gap-2">
+                  <Clock7 />
+                  <p className="text-gray-700 font-medium">9:00 PM - Head home</p>
+                </div>
+
+                <p className="text-gray-600">
+                  💫 **We start heading home because it's a long drive back.**
+                </p>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock7 />
-              <p className="text-gray-700">8:30pm</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin />
-              <p className="text-gray-700">Kei Concept Coffee</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <LinkIcon />
+
+            {/* Link to 123 Farm */}
+            <div className="flex justify-center mt-6">
               <a
-                href="https://www.yelp.com/biz/kei-concept-coffee-westminster"
+                href="https://www.123farm.com/lavendernights"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open Yelp page for Kei Concept Coffee"
-                className="inline-block bg-red-500 text-white font-semibold py-1 px-4 rounded-lg shadow hover:bg-pink-600"
+                className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-all"
               >
-                View on Yelp
+                <LinkIcon className="w-5 h-5" />
+                Visit 123 Farm
               </a>
             </div>
+
           </CardContent>
         </Card>
       </motion.div>

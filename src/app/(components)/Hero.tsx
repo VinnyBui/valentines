@@ -3,6 +3,7 @@ import { motion, useMotionValue } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';
+import Image from "next/image";
 
 const Hero = () => {
   const size = useMotionValue(1);
@@ -40,7 +41,7 @@ const Hero = () => {
         }}
         className="h-36 sm:h-48"
       >
-        <img src={currentGif} alt="Panda GIF" className="h-full" />
+        <Image src={currentGif} alt="Panda GIF" width={144} height={144} className="h-full w-auto" />
       </motion.div>
       {/* Question */}
       <motion.div

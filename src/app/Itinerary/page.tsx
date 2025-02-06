@@ -107,8 +107,7 @@ const Itinerary = () => {
                 </div>
 
                 <p className="text-gray-600">
-                  🍽️ **Enjoy a pink-themed dinner** at the **Grand Oak Restaurant**, featuring heart-shaped sourdough pizzas 
-                  and special cocktails.
+                  🍽️ **Enjoy a pink-themed dinner** at the **Grand Oak Restaurant**
                 </p>
 
                 <div className="flex items-center gap-2">
